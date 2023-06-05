@@ -6,7 +6,9 @@
 #define MUDONYOURFACE_TCP_SERVER_H
 
 #include <iostream>
+#include <vector>
 #include <boost/asio.hpp>
+#include <MOYFNetworking/tcp_connection.h>
 
 namespace MOYF {
     enum class IPV {
@@ -29,6 +31,8 @@ namespace MOYF {
 
         boost::asio::io_context _ioContext;
         boost::asio::ip::tcp::acceptor _acceptor;
+
+        std::vector<TCPConnection::pointer> _connections {};
     };
 }
 

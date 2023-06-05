@@ -20,6 +20,16 @@ namespace MOYF {
                 std::cout << "Sent " << bytesTransferred << " bytes of data\n";
             }
         });
+
+        boost::asio::streambuf buffer;
+        _socket.async_receive(buffer.prepare(512), [this](const boost::system::error_code& error, size_t bytesTransferred){
+            if (error == boost::asio::error::eof) {
+                // Clean connection cut-off
+                std::cout << "Client disconnected properly\n";
+            } else if (error) {
+                throw boost::system::system_error(error);
+            }
+        });
     }
 
 }
