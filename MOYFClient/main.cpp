@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
 
             if (error == boost::asio::error::eof) {
                 // Clean connection cut-off
+//                std::cerr << error.what();
                 break;
             } else if (error) {
                 throw boost::system::system_error(error);

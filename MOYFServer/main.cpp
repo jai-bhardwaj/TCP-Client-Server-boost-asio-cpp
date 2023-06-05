@@ -1,27 +1,10 @@
 #include <iostream>
-#include <boost/asio.hpp>
+#include <MOYFNetworking/tcp_server.h>
+//#include <MOYFNetworking/tcp_connection.h>
 
-using boost::asio::ip::tcp;
-int main() {
-    try {
-        boost::asio::io_context ioContext;
+int main(int argc, char* argv[]) {
 
-        tcp::acceptor acceptor(ioContext, tcp::endpoint(tcp::v4(), 1337));
-
-        while(true) {
-            std::cout << "Accepting connections on port 1337!\n";
-
-            tcp::socket socket(ioContext);
-            acceptor.accept(socket);
-
-            std::cout << "Client connected! Sending message!\n";
-            std::string helloMessage = "Hello, beautiful client!\n";
-            boost::system::error_code error;
-
-            boost::asio::write(socket, boost::asio::buffer(helloMessage), error);
-        }
-    }catch (std::exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    MOYF::TCPServer server{MOYF::IPV::V4, 1337};
+    server.Run();
     return 0;
 }
