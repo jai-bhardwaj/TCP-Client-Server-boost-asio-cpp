@@ -8,9 +8,12 @@
 #include <iostream>
 #include <vector>
 #include <boost/asio.hpp>
-#include <MOYFNetworking/tcp_connection.h>
+#include "tcp_connection.h"
+#include <functional>
+#include <unordered_set>
 
 namespace MOYF {
+    namespace io = boost::asio;
     enum class IPV {
         V4,
         V6
@@ -21,6 +24,7 @@ namespace MOYF {
         TCPServer(IPV ipv, int port);
 
         int Run();
+        void Broadcast(const std::string &message);
 
     private:
         void startAccept();
@@ -29,10 +33,10 @@ namespace MOYF {
         IPV _ipVersion;
         int _port;
 
-        boost::asio::io_context _ioContext;
-        boost::asio::ip::tcp::acceptor _acceptor;
-
-        std::vector<TCPConnection::pointer> _connections {};
+        io::io_context _ioContext;
+        io::ip::tcp::acceptor _acceptor;
+        std::optional<io::ip::tcp::socket> _socket;
+        std::unordered_set<TCPConnection::pointer> _connections {};
     };
 }
 

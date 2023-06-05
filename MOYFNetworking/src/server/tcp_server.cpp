@@ -1,7 +1,7 @@
 //
 // Created by Jai Bhardwaj on 05/06/23.
 //
-#include "MOYFNetworking/tcp_server.h"
+#include "MOYFNetworking/server/tcp_server.h"
 
 namespace MOYF {
     using boost::asio::ip::tcp;
@@ -23,16 +23,22 @@ namespace MOYF {
         return 0;
     }
 
+    void TCPServer::Broadcast(const std::string &message) {
+
+    }
+
     void TCPServer::startAccept() {
-        // Create a connection
-        auto connection = TCPConnection::Create(_ioContext);
-        _connections.push_back(connection);
+        _socket.emplace(_ioContext);
         // asynchronously accept the connection
-        _acceptor.async_accept(connection->Socket(), [connection, this](const boost::system::error_code& error){
+        _acceptor.async_accept(*_socket, [this](const boost::system::error_code& error){
+        // Create a connection
+        auto connection = TCPConnection::Create(std::move(*_socket));
+        _connections.insert(connection);
             if (!error) {
                 connection->Start();
             }
             startAccept();
         });
     }
+
 }
