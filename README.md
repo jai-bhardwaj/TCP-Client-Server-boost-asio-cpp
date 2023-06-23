@@ -57,7 +57,7 @@ To use the TCP Networking Project, follow these steps:
 
 ## Example
 
-![Image Description](https://i.ibb.co/1LLpQ6T/Screenshot-2023-06-12-at-11-58-18-AM.png)
+![Image Description](https://raw.githubusercontent.com/jai-bhardwaj/TCP-Client-Server-boost-asio-cpp/main/Screenshot%202023-06-12%20at%2011.58.18%20AM.png)
 
 ## Contributing
 
