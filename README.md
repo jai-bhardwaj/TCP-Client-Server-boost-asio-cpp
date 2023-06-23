@@ -57,7 +57,7 @@ To use the TCP Networking Project, follow these steps:
 
 ## Example
 
-![Image Description](https://drive.google.com/file/d/15JDT6VbN7Cquhr00ug3z9z-z1nwsOm_R/view?usp=sharing)
+![Image Description](https://i.ibb.co/1LLpQ6T/Screenshot-2023-06-12-at-11-58-18-AM.png)
 
 ## Contributing
 
